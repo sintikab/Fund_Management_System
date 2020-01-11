@@ -188,7 +188,6 @@ public class LoginPage extends javax.swing.JFrame {
         String passwordText = password.getText();
         String dbpassword = "";
         
-        try {
         if (usernameText.equals("") || passwordText.equals("")){
             //If username or the password is empty
             clearFields();
@@ -196,35 +195,44 @@ public class LoginPage extends javax.swing.JFrame {
         }else{
             if(StaticAttributes.CURRENT_USER_TYPE.equals(Common.ADMIN)){
                 //Admin login
-                ResultSet resultSet = DBConnect.selectDB("SELECT username FROM authentication WHERE is_admin = 'true' and username = '"+usernameText+"'");
-                if (resultSet.next() == false){
-                    //Incorrect username
-                    clearFields();
-                    Message.showError(AppStrings.INCORRECT_CREDENTAILS, AppStrings.ERROR);
-                }else{
-                        ResultSet passwordResultsSet = DBConnect.selectDB("SELECT * FROM authentication WHERE username = '"+usernameText+"' and password = '"+passwordText+"' and is_admin = 'true'" );
-                       
-                        while(passwordResultsSet.next()){
-                            dbpassword = passwordResultsSet.getString("password");
-                        }
-                        
-                        if (dbpassword.equals("")){
-                             //Incorrect credentials
+                
+                    ResultSet resultSet = DBConnect.selectDB("SELECT username FROM authentication WHERE is_admin = 'true' and username = '"+usernameText+"'");
+                    try {
+                        if (resultSet.next() == false){
+                            //Incorrect username
                             clearFields();
                             Message.showError(AppStrings.INCORRECT_CREDENTAILS, AppStrings.ERROR);
                         }else{
-                            //Corrct credentials
-                            navigateToManagementSelection();
+                            ResultSet passwordResultsSet = DBConnect.selectDB("SELECT * FROM authentication WHERE username = '"+usernameText+"' and password = '"+passwordText+"' and is_admin = 'true'" );
+                            
+                            while(passwordResultsSet.next()){
+                                dbpassword = passwordResultsSet.getString("password");
+                            }
+                            
+                            if (dbpassword.equals("")){
+                                //Incorrect credentials
+                                clearFields();
+                                Message.showError(AppStrings.INCORRECT_CREDENTAILS, AppStrings.ERROR);
+                            }else{
+                                //Corrct credentials
+                                navigateToManagementSelection();
+                            }
                         }
-                }
+                    } catch (SQLException ex) {
+                        Logger.getLogger(LoginPage.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+               
             }else{
                 //User login
-                ResultSet resultSet = DBConnect.selectDB("SELECT username FROM authentication WHERE is_admin = 'false' and username = '"+usernameText+"'");
-                if (resultSet.next() == false){
-                    //Incorrect username
-                    clearFields();
-                    Message.showError(AppStrings.INCORRECT_CREDENTAILS, AppStrings.ERROR);
-                }else{
+                try{
+                    
+                    
+                    ResultSet resultSet = DBConnect.selectDB("SELECT username FROM authentication WHERE is_admin = 'false' and username = '"+usernameText+"'");
+                    if (resultSet.next() == false){
+                        //Incorrect username
+                        clearFields();
+                        Message.showError(AppStrings.INCORRECT_CREDENTAILS, AppStrings.ERROR);
+                    }else{
                         ResultSet passwordResultsSet = DBConnect.selectDB("SELECT * FROM authentication WHERE username = '"+usernameText+"' and password = '"+passwordText+"' and is_admin = 'false'" );
                        
                         while(passwordResultsSet.next()){
@@ -232,19 +240,19 @@ public class LoginPage extends javax.swing.JFrame {
                         }
                         
                         if (dbpassword.equals("")){
-                             //Incorrect credentials
+                            //Incorrect credentials
                             clearFields();
                             Message.showError(AppStrings.INCORRECT_CREDENTAILS, AppStrings.ERROR);
                         }else{
                             //Corrct credentials
                             navigateToManagementSelection();
                         }
+                    }
+                }catch(Exception e){
+                    Message.showError(AppStrings.SOMETHING_WRONG, AppStrings.ERROR);
                 }
             }
             
-        }
-        } catch (SQLException ex) {
-                        Logger.getLogger(LoginPage.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 

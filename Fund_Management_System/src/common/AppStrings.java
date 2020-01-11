@@ -18,6 +18,7 @@ public class AppStrings {
     public static String EMPTY_MANDATORY_FIELDS = "Please update the mandatory fields";
     public static String SOMETHING_WRONG = "Something went wrong, try again!";
     public static String RESET_SUBMIT = "Password reset request submitted, Club admin will contact you soon.";
+    public static String SUCCESS_INSERT = "Data insertion success";
     
     //Application message titles
      public static String ERROR = "Error";

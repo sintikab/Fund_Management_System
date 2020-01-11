@@ -269,7 +269,7 @@ Sponsor sponsor = null;
         sponsor.setAddress(sponsor_address.getText());
         
         if (sponsor.validateValues()){
-            
+             sponsor.insertSponsor();
         }else{
             Message.showError(AppStrings.EMPTY_MANDATORY_FIELDS, AppStrings.ERROR);
         }
