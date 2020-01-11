@@ -5,17 +5,29 @@
  */
 package scenes;
 
+import common.AppStrings;
+import components.Message;
+import java.sql.Date;
+import models.Sponsor;
+
 /**
  *
  * @author User
  */
 public class SponsorManagement extends javax.swing.JFrame {
-
+Sponsor sponsor = null;
     /**
      * Creates new form SponsorManagement
      */
     public SponsorManagement() {
         initComponents();
+        init();
+    }
+    
+    public void init(){
+        sponsor = new Sponsor();
+        sponsor_id.setText(sponsor.getId());
+        sponsor_id.setEditable(false);
     }
 
     /**
@@ -40,13 +52,16 @@ public class SponsorManagement extends javax.swing.JFrame {
         sponsor_id = new javax.swing.JTextField();
         sponsor_name = new javax.swing.JTextField();
         sponsor_phone = new javax.swing.JTextField();
-        fund_date = new javax.swing.JTextField();
-        amount = new javax.swing.JTextField();
+        sponsor_email = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        note = new javax.swing.JTextArea();
+        sponsor_address = new javax.swing.JTextArea();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jButton4 = new javax.swing.JButton();
+        sponsor_dob = new com.toedter.calendar.JDateChooser();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -80,11 +95,11 @@ public class SponsorManagement extends javax.swing.JFrame {
 
         jLabel4.setText("Contact:");
 
-        jLabel5.setText("Note:");
+        jLabel5.setText("Address:");
 
-        jLabel6.setText("Fund Recived Date:");
+        jLabel6.setText("Email:");
 
-        jLabel7.setText("Amount Recived:");
+        jLabel7.setText("Date of birth:");
 
         sponsor_id.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -104,21 +119,15 @@ public class SponsorManagement extends javax.swing.JFrame {
             }
         });
 
-        fund_date.addActionListener(new java.awt.event.ActionListener() {
+        sponsor_email.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                fund_dateActionPerformed(evt);
+                sponsor_emailActionPerformed(evt);
             }
         });
 
-        amount.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                amountActionPerformed(evt);
-            }
-        });
-
-        note.setColumns(20);
-        note.setRows(5);
-        jScrollPane1.setViewportView(note);
+        sponsor_address.setColumns(20);
+        sponsor_address.setRows(5);
+        jScrollPane1.setViewportView(sponsor_address);
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -140,6 +149,15 @@ public class SponsorManagement extends javax.swing.JFrame {
             }
         });
 
+        jLabel8.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel8.setText("*");
+
+        jLabel9.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel9.setText("*");
+
+        jLabel10.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel10.setText("*");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -159,23 +177,33 @@ public class SponsorManagement extends javax.swing.JFrame {
                                     .addGap(18, 18, 18)
                                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGap(18, 18, 18)
-                                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 77, Short.MAX_VALUE))
+                                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 84, Short.MAX_VALUE))
                                 .addGroup(layout.createSequentialGroup()
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(jLabel2)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(jLabel8))
+                                        .addComponent(jLabel7)
                                         .addComponent(jLabel1)
-                                        .addComponent(jLabel2))
-                                    .addGap(59, 59, 59)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                                .addGroup(layout.createSequentialGroup()
+                                                    .addComponent(jLabel6)
+                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                    .addComponent(jLabel10))
+                                                .addComponent(jLabel4))
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(jLabel9)))
+                                    .addGap(55, 55, 55)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                         .addComponent(sponsor_name, javax.swing.GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE)
                                         .addComponent(sponsor_id)
                                         .addComponent(sponsor_phone, javax.swing.GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE)
-                                        .addComponent(fund_date, javax.swing.GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE)
-                                        .addComponent(amount, javax.swing.GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE)
-                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))))
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel7))
+                                        .addComponent(sponsor_email, javax.swing.GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE)
+                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                                        .addComponent(sponsor_dob, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(jLabel5))
                         .addGap(18, 18, 18)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 392, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -196,19 +224,24 @@ public class SponsorManagement extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
-                            .addComponent(sponsor_name, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(sponsor_name, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel8))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
-                            .addComponent(sponsor_phone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(sponsor_phone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel9))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel6)
-                            .addComponent(fund_date, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(sponsor_email, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel10))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel7)
-                            .addComponent(amount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel7)
+                                .addGap(6, 6, 6))
+                            .addComponent(sponsor_dob, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(20, 20, 20)
@@ -229,7 +262,17 @@ public class SponsorManagement extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        sponsor.setName(sponsor_name.getText());
+        sponsor.setContact(sponsor_phone.getText());
+        sponsor.setEmail(sponsor_email.getText());
+        sponsor.setDob(sponsor_dob.getDate());
+        sponsor.setAddress(sponsor_address.getText());
+        
+        if (sponsor.validateValues()){
+            
+        }else{
+            Message.showError(AppStrings.EMPTY_MANDATORY_FIELDS, AppStrings.ERROR);
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -252,13 +295,9 @@ public class SponsorManagement extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_sponsor_phoneActionPerformed
 
-    private void fund_dateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fund_dateActionPerformed
+    private void sponsor_emailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sponsor_emailActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_fund_dateActionPerformed
-
-    private void amountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_amountActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_amountActionPerformed
+    }//GEN-LAST:event_sponsor_emailActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         ManagemetSelection managemetSelection = new ManagemetSelection();
@@ -302,23 +341,26 @@ public class SponsorManagement extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField amount;
-    private javax.swing.JTextField fund_date;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextArea note;
+    private javax.swing.JTextArea sponsor_address;
+    private com.toedter.calendar.JDateChooser sponsor_dob;
+    private javax.swing.JTextField sponsor_email;
     private javax.swing.JTextField sponsor_id;
     private javax.swing.JTextField sponsor_name;
     private javax.swing.JTextField sponsor_phone;
