@@ -5,6 +5,10 @@
  */
 package scenes;
 
+import common.AppStrings;
+import components.Message;
+import db_connection.DBConnect;
+
 /**
  *
  * @author User
@@ -27,7 +31,7 @@ public class ForgetPassword extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jTextField3 = new javax.swing.JTextField();
+        resetname = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
@@ -35,9 +39,9 @@ public class ForgetPassword extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jTextField3.addActionListener(new java.awt.event.ActionListener() {
+        resetname.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField3ActionPerformed(evt);
+                resetnameActionPerformed(evt);
             }
         });
 
@@ -48,7 +52,7 @@ public class ForgetPassword extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setText("Email or Username");
+        jLabel2.setText("Username or name");
 
         jLabel1.setForeground(new java.awt.Color(255, 0, 51));
         jLabel1.setText("By clikcing on \"Request for password reset\", an password reset request will be dispatch to the admin. ");
@@ -68,7 +72,7 @@ public class ForgetPassword extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(resetname, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(218, 218, 218))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -90,7 +94,7 @@ public class ForgetPassword extends javax.swing.JFrame {
                 .addComponent(jButton2)
                 .addGap(38, 38, 38)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(resetname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 186, Short.MAX_VALUE)
                 .addComponent(jLabel1)
@@ -102,12 +106,27 @@ public class ForgetPassword extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+    private void resetnameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetnameActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField3ActionPerformed
+    }//GEN-LAST:event_resetnameActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        String name = resetname.getText();
+        
+        if (name.equals("")){
+            //Empty reset name or id
+            Message.showError(AppStrings.EMPTY_FIELDS, AppStrings.ERROR);
+        }else{
+            try{
+                DBConnect.insertDB("INSERT INTO reset_requests(name_or_id, is_reset) VALUES ('"+name+"', 'false')");
+                resetname.setText("");
+                Message.showInfoMessage(AppStrings.RESET_SUBMIT, AppStrings.SUCCESS);
+            }catch(Exception e){
+                e.printStackTrace();
+                resetname.setText("");
+                Message.showError(AppStrings.SOMETHING_WRONG, AppStrings.ERROR);
+            }
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -159,6 +178,6 @@ public class ForgetPassword extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JTextField jTextField3;
+    private javax.swing.JTextField resetname;
     // End of variables declaration//GEN-END:variables
 }
