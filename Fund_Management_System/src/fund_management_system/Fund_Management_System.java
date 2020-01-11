@@ -18,7 +18,10 @@ public class Fund_Management_System {
      */
     public static void main(String[] args) {
         
+        //Open user selection window
         UserSelection s1 = new UserSelection();
+        s1.setVisible(true);
+        
         
     }
     
