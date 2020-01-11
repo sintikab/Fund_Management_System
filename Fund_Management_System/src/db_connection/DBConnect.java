@@ -16,15 +16,19 @@ import javax.swing.JOptionPane;
  * @author User
  */
 public class DBConnect {
-        Connection connection = null;
+        static Connection connection = null;
         
         //Create connection
         public static Connection connectDB(){
+            
+            Connection resultConn = null;
             try{
-                Class.forName("org.sqlite.JDBC");
-                Connection conn = DriverManager.getConnection("jdbc:sqlite:fund_management_system_db.db");
+             if (connection == null){
+                 Class.forName("org.sqlite.JDBC");
+                resultConn = DriverManager.getConnection("jdbc:sqlite:fund_management_system_db.db");
+             }
                 
-                return conn;
+                return resultConn;
             }catch(Exception e){
                 e.printStackTrace();
                JOptionPane.showMessageDialog(null, "Connection Fail");
@@ -38,6 +42,9 @@ public class DBConnect {
         try {
             preparedStatement = connection.prepareStatement(qry);
             preparedStatement.execute();
+            
+
+           
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -51,6 +58,8 @@ public class DBConnect {
         try {
             preparedStatement = connection.prepareStatement(qry);
             resultSet = preparedStatement.executeQuery();
+
+            
         } catch (Exception e) {
             e.printStackTrace();
         }
