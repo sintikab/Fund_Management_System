@@ -17,6 +17,9 @@ import javax.swing.JOptionPane;
  */
 public class DBConnect {
         static Connection connection = null;
+        static PreparedStatement preparedStatement = null;
+        static ResultSet resultSet = null;
+        
         
         //Create connection
         public static Connection connectDB(){
@@ -37,25 +40,34 @@ public class DBConnect {
         }
         
         public static void insertDB(String qry){
-            Connection connection = DBConnect.connectDB();
-        PreparedStatement preparedStatement = null;
+            if (connection == null){
+                connection = connectDB();
+            }
         try {
+            if (preparedStatement != null){
+                preparedStatement.close();
+            }
             preparedStatement = connection.prepareStatement(qry);
             preparedStatement.execute();
-            
-
-           
+ 
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
         
         public static ResultSet selectDB(String qry){
-            Connection connection = DBConnect.connectDB();
-        PreparedStatement preparedStatement = null;
-        ResultSet resultSet = null;
+            if (connection == null){
+                connection = connectDB();
+            }
         
         try {
+            if (preparedStatement != null){
+                preparedStatement.close();
+            }
+            
+            if (resultSet != null){
+                resultSet.close();
+            }
             preparedStatement = connection.prepareStatement(qry);
             resultSet = preparedStatement.executeQuery();
 

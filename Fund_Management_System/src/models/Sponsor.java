@@ -9,6 +9,9 @@ import common.AppStrings;
 import components.Components;
 import components.Message;
 import db_connection.DBConnect;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -95,9 +98,9 @@ public class Sponsor {
    
    public void insertSponsor(){
        try {
-//           DBConnect.insertDB("INSERT INTO sponsor (id,name,contact,email,dob,address) VALUES ('"+this.id+"','"+this.name+"','"+this.contact+"','"+this.email+"','"+this.dob+"','"+this.address+"')");
-       DBConnect.insertDB("INSERT INTO sponsor (id,name,contact,email,dob,address) VALUES ('45v0','Shahani','0763452267','shahanifar@gmail.com','','Badulla')");
-Message.showInfoMessage(AppStrings.SUCCESS_INSERT, AppStrings.SUCCESS);
+        DBConnect.insertDB("INSERT INTO sponsor (id,name,contact,email,dob,address) VALUES ('"+this.id+"','"+this.name+"','"+this.contact+"','"+this.email+"','"+this.dob+"','"+this.address+"')");
+        
+       Message.showInfoMessage(AppStrings.SUCCESS_INSERT, AppStrings.SUCCESS);
        } catch (Exception ex) {
            Logger.getLogger(Sponsor.class.getName()).log(Level.SEVERE, null, ex);
            Message.showError(AppStrings.SOMETHING_WRONG, AppStrings.ERROR);

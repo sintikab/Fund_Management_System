@@ -118,7 +118,9 @@ public class ForgetPassword extends javax.swing.JFrame {
             Message.showError(AppStrings.EMPTY_FIELDS, AppStrings.ERROR);
         }else{
             try{
+                
                 DBConnect.insertDB("INSERT INTO reset_requests(name_or_id, is_reset) VALUES ('"+name+"', 'false')");
+                
                 resetname.setText("");
                 Message.showInfoMessage(AppStrings.RESET_SUBMIT, AppStrings.SUCCESS);
             }catch(Exception e){
