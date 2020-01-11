@@ -5,8 +5,6 @@
  */
 package db_connection;
 
-import common.AppStrings;
-import components.Message;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -40,23 +38,10 @@ public class DBConnect {
         try {
             preparedStatement = connection.prepareStatement(qry);
             preparedStatement.execute();
-            
-             
         } catch (Exception e) {
             e.printStackTrace();
-            Message.showError(AppStrings.SOMETHING_WRONG, AppStrings.ERROR);
         }
-        
-//        finally {
-//  if (connection != null) {
-//    try {
-//      connection.close(); // <-- This is important
-//    } catch (SQLException e) {
-//      /* handle exception */
-//    }
-//  }
-//    }
-        }
+    }
         
         public static ResultSet selectDB(String qry){
             Connection connection = DBConnect.connectDB();
@@ -66,21 +51,10 @@ public class DBConnect {
         try {
             preparedStatement = connection.prepareStatement(qry);
             resultSet = preparedStatement.executeQuery();
-             connection.close(); 
         } catch (Exception e) {
             e.printStackTrace();
-            Message.showError(AppStrings.SOMETHING_WRONG, AppStrings.ERROR);
         }
-//        finally {
-//  if (connection != null) {
-//    try {
-//      connection.close(); // <-- This is important
-//    } catch (SQLException e) {
-//      /* handle exception */
-//    }
-//  }
         return resultSet;
-//    }
+    }
      
-}
 }
