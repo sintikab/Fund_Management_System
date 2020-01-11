@@ -7,6 +7,8 @@ package db_connection;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 
 /**
@@ -17,11 +19,10 @@ public class DBConnect {
         Connection connection = null;
         
         //Create connection
-        public static Connection DonnectDB(){
+        public static Connection connectDB(){
             try{
                 Class.forName("org.sqlite.JDBC");
                 Connection conn = DriverManager.getConnection("jdbc:sqlite:fund_management_system_db.db");
-                JOptionPane.showMessageDialog(null, "Connection Success");
                 
                 return conn;
             }catch(Exception e){
@@ -30,5 +31,30 @@ public class DBConnect {
             }
             return null;
         }
+        
+        public static void insertDB(String qry){
+            Connection connection = DBConnect.connectDB();
+        PreparedStatement preparedStatement = null;
+        try {
+            preparedStatement = connection.prepareStatement(qry);
+            preparedStatement.execute();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+        
+        public static ResultSet selectDB(String qry){
+            Connection connection = DBConnect.connectDB();
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        
+        try {
+            preparedStatement = connection.prepareStatement(qry);
+            resultSet = preparedStatement.executeQuery();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return resultSet;
+    }
      
 }
