@@ -12,6 +12,8 @@ import db_connection.DBConnect;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -39,6 +41,12 @@ public class Sponsor {
    
     public Sponsor(){
        this.id = Components.generateUUID("Sponsor");
+   }
+    
+    public Sponsor(String name, String contact, String email){
+       this.name = name;
+       this.contact = contact;
+       this.email = email;
    }
 
     public String getId() {
@@ -98,12 +106,46 @@ public class Sponsor {
    
    public void insertSponsor(){
        try {
-        DBConnect.insertDB("INSERT INTO sponsor (id,name,contact,email,dob,address) VALUES ('"+this.id+"','"+this.name+"','"+this.contact+"','"+this.email+"','"+this.dob+"','"+this.address+"')");
+           SimpleDateFormat dateFormat = new SimpleDateFormat(common.Common.DATE_FORMAT);
+String joindate = dateFormat.format(this.dob);
+        DBConnect.insertDB("INSERT INTO sponsor (id,name,contact,email,dob,address) VALUES ('"+this.id+"','"+this.name+"','"+this.contact+"','"+this.email+"','"+joindate+"','"+this.address+"')");
         
        Message.showInfoMessage(AppStrings.SUCCESS_INSERT, AppStrings.SUCCESS);
        } catch (Exception ex) {
            Logger.getLogger(Sponsor.class.getName()).log(Level.SEVERE, null, ex);
            Message.showError(AppStrings.SOMETHING_WRONG, AppStrings.ERROR);
+       } 
+   }
+   
+   public void findUserIdFromNameEmailContact(){
+       String qry = "SELECT id from sponsor where name = '"+this.name+"' and contact = '"+this.contact+"' and email ='"+this.email+"'  ORDER BY ROWID ASC LIMIT 1"; 
+       ResultSet resultSet = DBConnect.selectDB(qry);
+       
+       try {
+           while(resultSet.next()){
+               this.id = resultSet.getString("id");
+           }
+           
+       } catch (SQLException ex) {
+           Logger.getLogger(Sponsor.class.getName()).log(Level.SEVERE, null, ex);
+       }
+   }
+   
+   public void findSponsorDetailsFromId(){
+       String qry = "SELECT * from sponsor where id = '"+this.id+"'";
+       ResultSet resultSet = DBConnect.selectDB(qry);
+       
+       try {
+           while(resultSet.next()){
+               this.name = resultSet.getString("name");
+               this.contact = resultSet.getString("contact");
+               this.email = resultSet.getString("email");
+               this.dob = new SimpleDateFormat(common.Common.DATE_FORMAT).parse(resultSet.getString("dob"));
+               this.address = resultSet.getString("address");
+           }
+           
+       } catch (Exception ex) {
+           Logger.getLogger(Sponsor.class.getName()).log(Level.SEVERE, null, ex);
        }
        
    }

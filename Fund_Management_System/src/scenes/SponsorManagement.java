@@ -7,8 +7,11 @@ package scenes;
 
 import common.AppStrings;
 import components.Message;
+import db_connection.DBConnect;
 import java.sql.Date;
+import java.sql.ResultSet;
 import models.Sponsor;
+import net.proteanit.sql.DbUtils;
 
 /**
  *
@@ -22,12 +25,27 @@ Sponsor sponsor = null;
     public SponsorManagement() {
         initComponents();
         init();
+        tableload();
     }
     
     public void init(){
         sponsor = new Sponsor();
         sponsor_id.setText(sponsor.getId());
         sponsor_id.setEditable(false);
+    }
+    
+    private void clearFields(){
+        sponsor_name.setText("");
+        sponsor_phone.setText("");
+        sponsor_email.setText("");
+        sponsor_address.setText("");
+        sponsor_dob.setDate(null);
+    }
+    
+    private void tableload(){
+        String qry = "SELECT name, contact, email from sponsor";
+        ResultSet resultSet = DBConnect.selectDB(qry);
+        sponsortable.setModel(DbUtils.resultSetToTableModel(resultSet));
     }
 
     /**
@@ -56,7 +74,7 @@ Sponsor sponsor = null;
         jScrollPane1 = new javax.swing.JScrollPane();
         sponsor_address = new javax.swing.JTextArea();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        sponsortable = new javax.swing.JTable();
         jButton4 = new javax.swing.JButton();
         sponsor_dob = new com.toedter.calendar.JDateChooser();
         jLabel8 = new javax.swing.JLabel();
@@ -129,7 +147,7 @@ Sponsor sponsor = null;
         sponsor_address.setRows(5);
         jScrollPane1.setViewportView(sponsor_address);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        sponsortable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -140,7 +158,12 @@ Sponsor sponsor = null;
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane2.setViewportView(jTable1);
+        sponsortable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                sponsortableMouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(sponsortable);
 
         jButton4.setText("< Management Selection");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
@@ -270,6 +293,10 @@ Sponsor sponsor = null;
         
         if (sponsor.validateValues()){
              sponsor.insertSponsor();
+             sponsor = new Sponsor();
+             sponsor_id.setText(sponsor.getId());
+             clearFields();
+             tableload();
         }else{
             Message.showError(AppStrings.EMPTY_MANDATORY_FIELDS, AppStrings.ERROR);
         }
@@ -304,6 +331,23 @@ Sponsor sponsor = null;
         managemetSelection.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void sponsortableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sponsortableMouseClicked
+        
+        //Set row values to fields
+        int row = sponsortable.getSelectedRow();
+        
+        Sponsor sponsor = new Sponsor(sponsortable.getValueAt(row, 0).toString(), sponsortable.getValueAt(row, 1).toString(), sponsortable.getValueAt(row, 2).toString());
+        sponsor.findUserIdFromNameEmailContact();
+        sponsor.findSponsorDetailsFromId();
+        
+        sponsor_id.setText(sponsor.getId());
+        sponsor_name.setText(sponsor.getName());
+        sponsor_phone.setText(sponsor.getContact());
+        sponsor_email.setText(sponsor.getEmail());
+        sponsor_dob.setDate(sponsor.getDob());
+        sponsor_address.setText(sponsor.getAddress());
+    }//GEN-LAST:event_sponsortableMouseClicked
 
     /**
      * @param args the command line arguments
@@ -357,12 +401,12 @@ Sponsor sponsor = null;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextArea sponsor_address;
     private com.toedter.calendar.JDateChooser sponsor_dob;
     private javax.swing.JTextField sponsor_email;
     private javax.swing.JTextField sponsor_id;
     private javax.swing.JTextField sponsor_name;
     private javax.swing.JTextField sponsor_phone;
+    private javax.swing.JTable sponsortable;
     // End of variables declaration//GEN-END:variables
 }

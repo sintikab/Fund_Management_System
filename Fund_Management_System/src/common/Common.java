@@ -12,5 +12,6 @@ package common;
 public class Common {
     public static String ADMIN = "ADMIN";
     public static String USER = "USER";
+    public static String DATE_FORMAT = "dd/MM/yyyy";
     
 }
