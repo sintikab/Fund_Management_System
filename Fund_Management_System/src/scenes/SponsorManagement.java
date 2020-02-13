@@ -19,6 +19,7 @@ import net.proteanit.sql.DbUtils;
  */
 public class SponsorManagement extends javax.swing.JFrame {
 Sponsor sponsor = null;
+boolean is_row_selected = false;
     /**
      * Creates new form SponsorManagement
      */
@@ -57,9 +58,9 @@ Sponsor sponsor = null;
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        addButton = new javax.swing.JButton();
+        updateButton = new javax.swing.JButton();
+        deleteButton = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -83,24 +84,24 @@ Sponsor sponsor = null;
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jButton1.setText("Add ");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        addButton.setText("Add ");
+        addButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                addButtonActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Update");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        updateButton.setText("Update");
+        updateButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                updateButtonActionPerformed(evt);
             }
         });
 
-        jButton3.setText("Delete");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        deleteButton.setText("Delete");
+        deleteButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                deleteButtonActionPerformed(evt);
             }
         });
 
@@ -196,11 +197,11 @@ Sponsor sponsor = null;
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(addButton, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGap(18, 18, 18)
-                                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(updateButton, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGap(18, 18, 18)
-                                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 84, Short.MAX_VALUE))
+                                    .addComponent(deleteButton, javax.swing.GroupLayout.DEFAULT_SIZE, 84, Short.MAX_VALUE))
                                 .addGroup(layout.createSequentialGroup()
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addGroup(layout.createSequentialGroup()
@@ -275,16 +276,16 @@ Sponsor sponsor = null;
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 381, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton3)
-                    .addComponent(jButton2)
-                    .addComponent(jButton1))
+                    .addComponent(deleteButton)
+                    .addComponent(updateButton)
+                    .addComponent(addButton))
                 .addGap(24, 24, 24))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
         sponsor.setName(sponsor_name.getText());
         sponsor.setContact(sponsor_phone.getText());
         sponsor.setEmail(sponsor_email.getText());
@@ -300,15 +301,19 @@ Sponsor sponsor = null;
         }else{
             Message.showError(AppStrings.EMPTY_MANDATORY_FIELDS, AppStrings.ERROR);
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_addButtonActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    private void updateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateButtonActionPerformed
+        if (this.is_row_selected){
+            addButton.setVisible(false);
+        }else{
+            Message.showError(AppStrings.ROW_SELECTION_NULL, AppStrings.ERROR);
+        }
+    }//GEN-LAST:event_updateButtonActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_deleteButtonActionPerformed
 
     private void sponsor_idActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sponsor_idActionPerformed
         // TODO add your handling code here:
@@ -347,6 +352,8 @@ Sponsor sponsor = null;
         sponsor_email.setText(sponsor.getEmail());
         sponsor_dob.setDate(sponsor.getDob());
         sponsor_address.setText(sponsor.getAddress());
+        
+        this.is_row_selected = true;
     }//GEN-LAST:event_sponsortableMouseClicked
 
     /**
@@ -385,9 +392,8 @@ Sponsor sponsor = null;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton addButton;
+    private javax.swing.JButton deleteButton;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -408,5 +414,6 @@ Sponsor sponsor = null;
     private javax.swing.JTextField sponsor_name;
     private javax.swing.JTextField sponsor_phone;
     private javax.swing.JTable sponsortable;
+    private javax.swing.JButton updateButton;
     // End of variables declaration//GEN-END:variables
 }

@@ -19,6 +19,7 @@ public class AppStrings {
     public static String SOMETHING_WRONG = "Something went wrong, try again!";
     public static String RESET_SUBMIT = "Password reset request submitted, Club admin will contact you soon.";
     public static String SUCCESS_INSERT = "Data insertion success";
+    public static String ROW_SELECTION_NULL = "Please select a row before continue";
     
     //Application message titles
      public static String ERROR = "Error";
