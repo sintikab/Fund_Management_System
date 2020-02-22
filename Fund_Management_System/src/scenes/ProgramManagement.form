@@ -33,7 +33,7 @@
                   </Group>
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Group type="102" attributes="0">
                                   <Component id="addButton" min="-2" pref="71" max="-2" attributes="0"/>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -65,22 +65,25 @@
                                   </Group>
                                   <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="sponsor_name" pref="134" max="32767" attributes="0"/>
-                                      <Component id="sponsor_id" max="32767" attributes="0"/>
-                                      <Component id="sponsor_phone" alignment="0" pref="134" max="32767" attributes="0"/>
-                                      <Component id="sponsor_email" alignment="0" pref="134" max="32767" attributes="0"/>
-                                      <Component id="jScrollPane1" alignment="0" pref="0" max="32767" attributes="0"/>
-                                      <Component id="sponsor_dob" max="32767" attributes="0"/>
+                                      <Component id="program_venue" pref="134" max="32767" attributes="0"/>
+                                      <Component id="program_id" max="32767" attributes="0"/>
+                                      <Component id="program_phone" alignment="0" pref="134" max="32767" attributes="0"/>
+                                      <Component id="program_time" alignment="0" pref="134" max="32767" attributes="0"/>
+                                      <Component id="program_date" max="32767" attributes="0"/>
+                                      <Component id="program_budget" alignment="0" pref="134" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
-                          <Component id="jLabel5" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel11" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="jScrollPane2" min="-2" pref="392" max="-2" attributes="0"/>
+                      <EmptySpace pref="16" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jScrollPane2" min="-2" pref="392" max="-2" attributes="0"/>
+                          <Component id="returnButton" pref="394" max="32767" attributes="0"/>
+                      </Group>
                   </Group>
               </Group>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -97,24 +100,24 @@
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                          <Component id="sponsor_id" min="-2" max="-2" attributes="0"/>
+                          <Component id="program_id" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="sponsor_name" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="program_venue" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="sponsor_phone" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="program_phone" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel9" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="sponsor_email" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="program_time" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel10" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -123,17 +126,12 @@
                               <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="sponsor_dob" alignment="1" min="-2" max="-2" attributes="0"/>
+                          <Component id="program_date" alignment="1" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
-                              <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" attributes="0">
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="jScrollPane1" min="-2" pref="85" max="-2" attributes="0"/>
-                          </Group>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jLabel11" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="program_budget" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <Component id="jScrollPane2" min="-2" pref="381" max="-2" attributes="0"/>
@@ -143,6 +141,7 @@
                   <Component id="deleteButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="updateButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="addButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="returnButton" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
           </Group>
@@ -176,12 +175,12 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
-        <Property name="text" type="java.lang.String" value="SponsorID : "/>
+        <Property name="text" type="java.lang.String" value="ProgramId :"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Name :"/>
+        <Property name="text" type="java.lang.String" value="Venue:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel3">
@@ -189,7 +188,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Tahoma" size="18" style="1"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Sponsor Details"/>
+        <Property name="text" type="java.lang.String" value="Program Details"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel4">
@@ -197,56 +196,36 @@
         <Property name="text" type="java.lang.String" value="Contact:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel5">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Address:"/>
-      </Properties>
-    </Component>
     <Component class="javax.swing.JLabel" name="jLabel6">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Email:"/>
+        <Property name="text" type="java.lang.String" value="Time"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel7">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Date of birth:"/>
+        <Property name="text" type="java.lang.String" value="Date: "/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="sponsor_id">
+    <Component class="javax.swing.JTextField" name="program_id">
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="sponsor_idActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="program_idActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JTextField" name="sponsor_name">
+    <Component class="javax.swing.JTextField" name="program_venue">
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="sponsor_nameActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="program_venueActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JTextField" name="sponsor_phone">
+    <Component class="javax.swing.JTextField" name="program_phone">
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="sponsor_phoneActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="program_phoneActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JTextField" name="sponsor_email">
+    <Component class="javax.swing.JTextField" name="program_time">
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="sponsor_emailActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="program_timeActionPerformed"/>
       </Events>
     </Component>
-    <Container class="javax.swing.JScrollPane" name="jScrollPane1">
-      <AuxValues>
-        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
-      </AuxValues>
-
-      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
-      <SubComponents>
-        <Component class="javax.swing.JTextArea" name="sponsor_address">
-          <Properties>
-            <Property name="columns" type="int" value="20"/>
-            <Property name="rows" type="int" value="5"/>
-          </Properties>
-        </Component>
-      </SubComponents>
-    </Container>
     <Container class="javax.swing.JScrollPane" name="jScrollPane2">
       <AuxValues>
         <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
@@ -254,7 +233,7 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JTable" name="sponsortable">
+        <Component class="javax.swing.JTable" name="programtable">
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
               <Table columnCount="4" rowCount="4">
@@ -266,7 +245,7 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="sponsortableMouseClicked"/>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="programtableMouseClicked"/>
           </Events>
         </Component>
       </SubComponents>
@@ -279,7 +258,7 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton4ActionPerformed"/>
       </Events>
     </Component>
-    <Component class="com.toedter.calendar.JDateChooser" name="sponsor_dob">
+    <Component class="com.toedter.calendar.JDateChooser" name="program_date">
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel8">
       <Properties>
@@ -304,6 +283,24 @@
         </Property>
         <Property name="text" type="java.lang.String" value="*"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="returnButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Return"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="returnButtonActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel11">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Budget:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="program_budget">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="program_budgetActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

@@ -5,6 +5,7 @@
  */
 package components;
 
+import common.AppStrings;
 import javax.swing.JOptionPane;
 
 /**
@@ -22,4 +23,17 @@ public class Message {
     JOptionPane.showMessageDialog(null, message,
       title, JOptionPane.INFORMATION_MESSAGE);
 }
+     
+     public static int showUpdateMessage(String updationName){
+         String heading = AppStrings.UPDATE_MESSAGE;
+         heading.replace("{updation}", updationName);
+         return JOptionPane.showConfirmDialog(null, heading);
+     }
+     
+     public static int showDeleteMessage(String deletionName){
+         String heading = AppStrings.DELETE_MESSAGE;
+         heading.replace("{deletion}", deletionName);
+         return JOptionPane.showConfirmDialog(null, heading);
+     }
+     
 }

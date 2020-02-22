@@ -36,6 +36,8 @@ boolean is_row_selected = false;
     }
     
     private void clearFields(){
+        sponsor = new Sponsor();
+        sponsor_id.setText(sponsor.getId());
         sponsor_name.setText("");
         sponsor_phone.setText("");
         sponsor_email.setText("");
@@ -44,7 +46,7 @@ boolean is_row_selected = false;
     }
     
     private void tableload(){
-        String qry = "SELECT name, contact, email from sponsor";
+        String qry = "SELECT name, contact, email from sponsor where status = 'ACTIVE'";
         ResultSet resultSet = DBConnect.selectDB(qry);
         sponsortable.setModel(DbUtils.resultSetToTableModel(resultSet));
     }
@@ -81,6 +83,7 @@ boolean is_row_selected = false;
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
+        returnButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -131,10 +134,20 @@ boolean is_row_selected = false;
                 sponsor_nameActionPerformed(evt);
             }
         });
+        sponsor_name.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                sponsor_nameKeyTyped(evt);
+            }
+        });
 
         sponsor_phone.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 sponsor_phoneActionPerformed(evt);
+            }
+        });
+        sponsor_phone.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                sponsor_phoneKeyTyped(evt);
             }
         });
 
@@ -181,6 +194,13 @@ boolean is_row_selected = false;
 
         jLabel10.setForeground(new java.awt.Color(255, 0, 0));
         jLabel10.setText("*");
+
+        returnButton.setText("Return");
+        returnButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                returnButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -229,8 +249,10 @@ boolean is_row_selected = false;
                                         .addComponent(sponsor_dob, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                             .addComponent(jLabel5))
                         .addGap(18, 18, 18)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 392, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 392, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(returnButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -278,7 +300,8 @@ boolean is_row_selected = false;
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(deleteButton)
                     .addComponent(updateButton)
-                    .addComponent(addButton))
+                    .addComponent(addButton)
+                    .addComponent(returnButton))
                 .addGap(24, 24, 24))
         );
 
@@ -294,8 +317,6 @@ boolean is_row_selected = false;
         
         if (sponsor.validateValues()){
              sponsor.insertSponsor();
-             sponsor = new Sponsor();
-             sponsor_id.setText(sponsor.getId());
              clearFields();
              tableload();
         }else{
@@ -304,15 +325,38 @@ boolean is_row_selected = false;
     }//GEN-LAST:event_addButtonActionPerformed
 
     private void updateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateButtonActionPerformed
-        if (this.is_row_selected){
-            addButton.setVisible(false);
-        }else{
-            Message.showError(AppStrings.ROW_SELECTION_NULL, AppStrings.ERROR);
+        sponsor = new Sponsor(
+                    sponsor_id.getText(),
+                    sponsor_name.getText(),
+                    sponsor_phone.getText(),
+                    sponsor_email.getText(),
+                    sponsor_dob.getDate(),
+                    sponsor_address.getText());
+        
+        if (sponsor.validateValues()){
+        int user_response = Message.showUpdateMessage(AppStrings.SPONSOR);
+       
+        if (user_response == 0){
+                sponsor.updateSponsor();
+                tableload();
         }
+        }else{
+                Message.showError(AppStrings.EMPTY_MANDATORY_FIELDS, AppStrings.ERROR);
+        }
+        
     }//GEN-LAST:event_updateButtonActionPerformed
 
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
-        // TODO add your handling code here:
+        int user_response = Message.showDeleteMessage(AppStrings.SPONSOR);
+        
+        if (user_response == 0){
+            sponsor = new Sponsor();
+            sponsor.setId(sponsor_id.getText());
+            
+                sponsor.deleteSponsor();
+                tableload(); 
+                clearFields();
+        }
     }//GEN-LAST:event_deleteButtonActionPerformed
 
     private void sponsor_idActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sponsor_idActionPerformed
@@ -338,7 +382,7 @@ boolean is_row_selected = false;
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void sponsortableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sponsortableMouseClicked
-        
+       
         //Set row values to fields
         int row = sponsortable.getSelectedRow();
         
@@ -353,8 +397,27 @@ boolean is_row_selected = false;
         sponsor_dob.setDate(sponsor.getDob());
         sponsor_address.setText(sponsor.getAddress());
         
-        this.is_row_selected = true;
+        addButton.setVisible(false);
     }//GEN-LAST:event_sponsortableMouseClicked
+
+    private void returnButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_returnButtonActionPerformed
+        clearFields();
+        addButton.setVisible(true);
+    }//GEN-LAST:event_returnButtonActionPerformed
+
+    private void sponsor_nameKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_sponsor_nameKeyTyped
+        // TODO add your handling code here:
+         if(!(Character.isLetter(evt.getKeyChar()))){
+                evt.consume();
+            }
+    }//GEN-LAST:event_sponsor_nameKeyTyped
+
+    private void sponsor_phoneKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_sponsor_phoneKeyTyped
+        
+           if(!(Character.isDigit(evt.getKeyChar()))){
+                evt.consume();
+            }
+    }//GEN-LAST:event_sponsor_phoneKeyTyped
 
     /**
      * @param args the command line arguments
@@ -407,6 +470,7 @@ boolean is_row_selected = false;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JButton returnButton;
     private javax.swing.JTextArea sponsor_address;
     private com.toedter.calendar.JDateChooser sponsor_dob;
     private javax.swing.JTextField sponsor_email;

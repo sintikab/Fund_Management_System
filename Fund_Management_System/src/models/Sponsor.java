@@ -30,6 +30,15 @@ public class Sponsor {
    private Date dob;
    private String address;
    
+   public Sponsor(String id, String name, String contact, String email, Date dob, String address){
+       this.id = id;
+       this.name = name;
+       this.contact = contact;
+       this.email = email;
+       this.dob = dob;
+       this.address = address;
+   }
+   
    public Sponsor(String name, String contact, String email, Date dob, String address){
        this.id = Components.generateUUID("Sponsor");
        this.name = name;
@@ -107,14 +116,37 @@ public class Sponsor {
    public void insertSponsor(){
        try {
            SimpleDateFormat dateFormat = new SimpleDateFormat(common.Common.DATE_FORMAT);
-String joindate = dateFormat.format(this.dob);
-        DBConnect.insertDB("INSERT INTO sponsor (id,name,contact,email,dob,address) VALUES ('"+this.id+"','"+this.name+"','"+this.contact+"','"+this.email+"','"+joindate+"','"+this.address+"')");
+           String joindate = dateFormat.format(this.dob);
+        DBConnect.insertDB("INSERT INTO sponsor (id,name,contact,email,dob,address,status) VALUES ('"+this.id+"','"+this.name+"','"+this.contact+"','"+this.email+"','"+joindate+"','"+this.address+"', '"+AppStrings.ACTIVE+"')");
         
        Message.showInfoMessage(AppStrings.SUCCESS_INSERT, AppStrings.SUCCESS);
        } catch (Exception ex) {
            Logger.getLogger(Sponsor.class.getName()).log(Level.SEVERE, null, ex);
            Message.showError(AppStrings.SOMETHING_WRONG, AppStrings.ERROR);
        } 
+   }
+   
+   public void updateSponsor(){
+       try {
+           SimpleDateFormat dateFormat = new SimpleDateFormat(common.Common.DATE_FORMAT);
+            String joindate = dateFormat.format(this.dob);
+        DBConnect.updateDB("UPDATE sponsor SET name = '"+this.name+"', contact = '"+this.contact+"', email = '"+this.email+"', dob = '"+joindate+"', address = '"+this.address+"' WHERE id = '"+this.id+"'");
+         
+       Message.showInfoMessage(AppStrings.SUCCESS_UPDATE, AppStrings.SUCCESS);
+       } catch (Exception ex) {
+           Logger.getLogger(Sponsor.class.getName()).log(Level.SEVERE, null, ex);
+           Message.showError(AppStrings.SOMETHING_WRONG, AppStrings.ERROR);
+       } 
+   }
+   
+   public void deleteSponsor(){
+       try {
+        DBConnect.updateDB("UPDATE sponsor SET status = '"+AppStrings.INACTIVE+"' WHERE id = '"+this.id+"'");
+       Message.showInfoMessage(AppStrings.SUCCESS_DELETE, AppStrings.SUCCESS);
+       } catch (Exception ex) {
+           Logger.getLogger(Sponsor.class.getName()).log(Level.SEVERE, null, ex);
+           Message.showError(AppStrings.SOMETHING_WRONG, AppStrings.ERROR);
+       }
    }
    
    public void findUserIdFromNameEmailContact(){

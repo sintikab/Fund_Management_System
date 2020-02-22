@@ -19,9 +19,25 @@ public class AppStrings {
     public static String SOMETHING_WRONG = "Something went wrong, try again!";
     public static String RESET_SUBMIT = "Password reset request submitted, Club admin will contact you soon.";
     public static String SUCCESS_INSERT = "Data insertion success";
+    public static String SUCCESS_UPDATE = "Data updation success";
+    public static String SUCCESS_DELETE = "Data deletion success";
     public static String ROW_SELECTION_NULL = "Please select a row before continue";
     
     //Application message titles
      public static String ERROR = "Error";
      public static String SUCCESS = "Success";
+     
+     //Messages
+     public static String UPDATE_MESSAGE = "Do you really want to update {updation} ?";
+     public static String DELETE_MESSAGE = "Do you really want to delete {deletion} ?";
+     
+     //Activities
+     public static String SPONSOR = "sponsor";
+     public static String PROGRAM = "program";
+     public static String RECOVER_PASSWORD = "recover passwords";
+     
+     //Status
+     public static String ACTIVE = "ACTIVE";
+     public static String INACTIVE = "INACTIVE";
+     public static String PENDING = "PENDING";
 }

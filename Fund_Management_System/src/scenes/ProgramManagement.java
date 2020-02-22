@@ -8,45 +8,48 @@ package scenes;
 import common.AppStrings;
 import components.Message;
 import db_connection.DBConnect;
-import java.sql.Date;
 import java.sql.ResultSet;
-import models.Sponsor;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import models.Program;
 import net.proteanit.sql.DbUtils;
 
 /**
  *
  * @author User
  */
-public class SponsorManagement extends javax.swing.JFrame {
-Sponsor sponsor = null;
+public class ProgramManagement extends javax.swing.JFrame {
+Program program = null;
 boolean is_row_selected = false;
     /**
      * Creates new form SponsorManagement
      */
-    public SponsorManagement() {
+    public ProgramManagement() {
         initComponents();
         init();
         tableload();
     }
     
     public void init(){
-        sponsor = new Sponsor();
-        sponsor_id.setText(sponsor.getId());
-        sponsor_id.setEditable(false);
+        program = new Program();
+        program_id.setText(program.getId());
+        program_id.setEditable(false);
     }
     
     private void clearFields(){
-        sponsor_name.setText("");
-        sponsor_phone.setText("");
-        sponsor_email.setText("");
-        sponsor_address.setText("");
-        sponsor_dob.setDate(null);
+        program = new Program();
+        program_id.setText(program.getId());
+        program_venue.setText("");
+        program_phone.setText("");
+        program_time.setText("");
+        program_budget.setText("");
+        program_date.setDate(null);
     }
     
     private void tableload(){
-        String qry = "SELECT name, contact, email from sponsor";
+        String qry = "SELECT venue, contact, date from program where status = 'ACTIVE'";
         ResultSet resultSet = DBConnect.selectDB(qry);
-        sponsortable.setModel(DbUtils.resultSetToTableModel(resultSet));
+        programtable.setModel(DbUtils.resultSetToTableModel(resultSet));
     }
 
     /**
@@ -65,22 +68,22 @@ boolean is_row_selected = false;
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        sponsor_id = new javax.swing.JTextField();
-        sponsor_name = new javax.swing.JTextField();
-        sponsor_phone = new javax.swing.JTextField();
-        sponsor_email = new javax.swing.JTextField();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        sponsor_address = new javax.swing.JTextArea();
+        program_id = new javax.swing.JTextField();
+        program_venue = new javax.swing.JTextField();
+        program_phone = new javax.swing.JTextField();
+        program_time = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
-        sponsortable = new javax.swing.JTable();
+        programtable = new javax.swing.JTable();
         jButton4 = new javax.swing.JButton();
-        sponsor_dob = new com.toedter.calendar.JDateChooser();
+        program_date = new com.toedter.calendar.JDateChooser();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
+        returnButton = new javax.swing.JButton();
+        jLabel11 = new javax.swing.JLabel();
+        program_budget = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -105,50 +108,44 @@ boolean is_row_selected = false;
             }
         });
 
-        jLabel1.setText("SponsorID : ");
+        jLabel1.setText("ProgramId :");
 
-        jLabel2.setText("Name :");
+        jLabel2.setText("Venue:");
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel3.setText("Sponsor Details");
+        jLabel3.setText("Program Details");
 
         jLabel4.setText("Contact:");
 
-        jLabel5.setText("Address:");
+        jLabel6.setText("Time");
 
-        jLabel6.setText("Email:");
+        jLabel7.setText("Date: ");
 
-        jLabel7.setText("Date of birth:");
-
-        sponsor_id.addActionListener(new java.awt.event.ActionListener() {
+        program_id.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                sponsor_idActionPerformed(evt);
+                program_idActionPerformed(evt);
             }
         });
 
-        sponsor_name.addActionListener(new java.awt.event.ActionListener() {
+        program_venue.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                sponsor_nameActionPerformed(evt);
+                program_venueActionPerformed(evt);
             }
         });
 
-        sponsor_phone.addActionListener(new java.awt.event.ActionListener() {
+        program_phone.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                sponsor_phoneActionPerformed(evt);
+                program_phoneActionPerformed(evt);
             }
         });
 
-        sponsor_email.addActionListener(new java.awt.event.ActionListener() {
+        program_time.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                sponsor_emailActionPerformed(evt);
+                program_timeActionPerformed(evt);
             }
         });
 
-        sponsor_address.setColumns(20);
-        sponsor_address.setRows(5);
-        jScrollPane1.setViewportView(sponsor_address);
-
-        sponsortable.setModel(new javax.swing.table.DefaultTableModel(
+        programtable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -159,12 +156,12 @@ boolean is_row_selected = false;
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        sponsortable.addMouseListener(new java.awt.event.MouseAdapter() {
+        programtable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                sponsortableMouseClicked(evt);
+                programtableMouseClicked(evt);
             }
         });
-        jScrollPane2.setViewportView(sponsortable);
+        jScrollPane2.setViewportView(programtable);
 
         jButton4.setText("< Management Selection");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
@@ -181,6 +178,21 @@ boolean is_row_selected = false;
 
         jLabel10.setForeground(new java.awt.Color(255, 0, 0));
         jLabel10.setText("*");
+
+        returnButton.setText("Return");
+        returnButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                returnButtonActionPerformed(evt);
+            }
+        });
+
+        jLabel11.setText("Budget:");
+
+        program_budget.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                program_budgetActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -221,16 +233,18 @@ boolean is_row_selected = false;
                                             .addComponent(jLabel9)))
                                     .addGap(55, 55, 55)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(sponsor_name, javax.swing.GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE)
-                                        .addComponent(sponsor_id)
-                                        .addComponent(sponsor_phone, javax.swing.GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE)
-                                        .addComponent(sponsor_email, javax.swing.GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE)
-                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                                        .addComponent(sponsor_dob, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                            .addComponent(jLabel5))
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 392, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                        .addComponent(program_venue, javax.swing.GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE)
+                                        .addComponent(program_id)
+                                        .addComponent(program_phone, javax.swing.GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE)
+                                        .addComponent(program_time, javax.swing.GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE)
+                                        .addComponent(program_date, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(program_budget, javax.swing.GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE))))
+                            .addComponent(jLabel11))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 392, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(returnButton, javax.swing.GroupLayout.DEFAULT_SIZE, 394, Short.MAX_VALUE))))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -244,41 +258,39 @@ boolean is_row_selected = false;
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
-                            .addComponent(sponsor_id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(program_id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
-                            .addComponent(sponsor_name, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(program_venue, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel8))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
-                            .addComponent(sponsor_phone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(program_phone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel9))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel6)
-                            .addComponent(sponsor_email, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(program_time, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel10))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel7)
                                 .addGap(6, 6, 6))
-                            .addComponent(sponsor_dob, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(20, 20, 20)
-                                .addComponent(jLabel5))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(program_date, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel11)
+                            .addComponent(program_budget, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 381, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(deleteButton)
                     .addComponent(updateButton)
-                    .addComponent(addButton))
+                    .addComponent(addButton)
+                    .addComponent(returnButton))
                 .addGap(24, 24, 24))
         );
 
@@ -286,16 +298,14 @@ boolean is_row_selected = false;
     }// </editor-fold>//GEN-END:initComponents
 
     private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
-        sponsor.setName(sponsor_name.getText());
-        sponsor.setContact(sponsor_phone.getText());
-        sponsor.setEmail(sponsor_email.getText());
-        sponsor.setDob(sponsor_dob.getDate());
-        sponsor.setAddress(sponsor_address.getText());
+        program.setVenue(program_venue.getText());
+        program.setContact(program_phone.getText());
+        program.setTime(program_time.getText());
+        program.setDate(program_date.getDate());
+        program.setBudget(Double.parseDouble(program_budget.getText().equals("")?"0":program_budget.getText()));
         
-        if (sponsor.validateValues()){
-             sponsor.insertSponsor();
-             sponsor = new Sponsor();
-             sponsor_id.setText(sponsor.getId());
+        if (program.validateValues()){
+             program.insertProgram();
              clearFields();
              tableload();
         }else{
@@ -304,32 +314,55 @@ boolean is_row_selected = false;
     }//GEN-LAST:event_addButtonActionPerformed
 
     private void updateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateButtonActionPerformed
-        if (this.is_row_selected){
-            addButton.setVisible(false);
-        }else{
-            Message.showError(AppStrings.ROW_SELECTION_NULL, AppStrings.ERROR);
+        program = new Program(
+                    program_id.getText(),
+                    program_venue.getText(),
+                    program_phone.getText(),
+                    program_time.getText(),
+                    program_date.getDate(),
+                    Double.parseDouble(program_budget.getText()));
+        
+        if (program.validateValues()){
+        int user_response = Message.showUpdateMessage(AppStrings.SPONSOR);
+       
+        if (user_response == 0){
+                program.updateProgram();
+                tableload();
         }
+        }else{
+                Message.showError(AppStrings.EMPTY_MANDATORY_FIELDS, AppStrings.ERROR);
+        }
+        
     }//GEN-LAST:event_updateButtonActionPerformed
 
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
-        // TODO add your handling code here:
+        int user_response = Message.showDeleteMessage(AppStrings.SPONSOR);
+        
+        if (user_response == 0){
+            program = new Program();
+            program.setId(program_id.getText());
+            
+                program.deleteProgram();
+                tableload(); 
+                clearFields();
+        }
     }//GEN-LAST:event_deleteButtonActionPerformed
 
-    private void sponsor_idActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sponsor_idActionPerformed
+    private void program_idActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_program_idActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_sponsor_idActionPerformed
+    }//GEN-LAST:event_program_idActionPerformed
 
-    private void sponsor_nameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sponsor_nameActionPerformed
+    private void program_venueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_program_venueActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_sponsor_nameActionPerformed
+    }//GEN-LAST:event_program_venueActionPerformed
 
-    private void sponsor_phoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sponsor_phoneActionPerformed
+    private void program_phoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_program_phoneActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_sponsor_phoneActionPerformed
+    }//GEN-LAST:event_program_phoneActionPerformed
 
-    private void sponsor_emailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sponsor_emailActionPerformed
+    private void program_timeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_program_timeActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_sponsor_emailActionPerformed
+    }//GEN-LAST:event_program_timeActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         ManagemetSelection managemetSelection = new ManagemetSelection();
@@ -337,24 +370,39 @@ boolean is_row_selected = false;
         this.dispose();
     }//GEN-LAST:event_jButton4ActionPerformed
 
-    private void sponsortableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sponsortableMouseClicked
-        
+    private void programtableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_programtableMouseClicked
+       
         //Set row values to fields
-        int row = sponsortable.getSelectedRow();
+        int row = programtable.getSelectedRow();
         
-        Sponsor sponsor = new Sponsor(sponsortable.getValueAt(row, 0).toString(), sponsortable.getValueAt(row, 1).toString(), sponsortable.getValueAt(row, 2).toString());
-        sponsor.findUserIdFromNameEmailContact();
-        sponsor.findSponsorDetailsFromId();
+       try{
+        Date date = new SimpleDateFormat(common.Common.DATE_FORMAT).parse(programtable.getValueAt(row, 2).toString());
+        Program program = new Program(programtable.getValueAt(row, 0).toString(), programtable.getValueAt(row, 1).toString(), date);
+        program.findProgramIdFromVenueContactTime();
+        program.findProgramDetailsFromId();
         
-        sponsor_id.setText(sponsor.getId());
-        sponsor_name.setText(sponsor.getName());
-        sponsor_phone.setText(sponsor.getContact());
-        sponsor_email.setText(sponsor.getEmail());
-        sponsor_dob.setDate(sponsor.getDob());
-        sponsor_address.setText(sponsor.getAddress());
+        program_id.setText(program.getId());
+        program_venue.setText(program.getVenue());
+        program_phone.setText(program.getContact());
+        program_time.setText(program.getTime());
+        program_date.setDate(program.getDate());
+        program_budget.setText(Double.toString(program.getBudget()));
+        addButton.setVisible(false);
+       }catch(Exception e){
+           e.printStackTrace();
+       }
         
-        this.is_row_selected = true;
-    }//GEN-LAST:event_sponsortableMouseClicked
+        
+    }//GEN-LAST:event_programtableMouseClicked
+
+    private void returnButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_returnButtonActionPerformed
+        clearFields();
+        addButton.setVisible(true);
+    }//GEN-LAST:event_returnButtonActionPerformed
+
+    private void program_budgetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_program_budgetActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_program_budgetActionPerformed
 
     /**
      * @param args the command line arguments
@@ -373,20 +421,21 @@ boolean is_row_selected = false;
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(SponsorManagement.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ProgramManagement.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(SponsorManagement.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ProgramManagement.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(SponsorManagement.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ProgramManagement.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(SponsorManagement.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ProgramManagement.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new SponsorManagement().setVisible(true);
+                new ProgramManagement().setVisible(true);
             }
         });
     }
@@ -397,23 +446,23 @@ boolean is_row_selected = false;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextArea sponsor_address;
-    private com.toedter.calendar.JDateChooser sponsor_dob;
-    private javax.swing.JTextField sponsor_email;
-    private javax.swing.JTextField sponsor_id;
-    private javax.swing.JTextField sponsor_name;
-    private javax.swing.JTextField sponsor_phone;
-    private javax.swing.JTable sponsortable;
+    private javax.swing.JTextField program_budget;
+    private com.toedter.calendar.JDateChooser program_date;
+    private javax.swing.JTextField program_id;
+    private javax.swing.JTextField program_phone;
+    private javax.swing.JTextField program_time;
+    private javax.swing.JTextField program_venue;
+    private javax.swing.JTable programtable;
+    private javax.swing.JButton returnButton;
     private javax.swing.JButton updateButton;
     // End of variables declaration//GEN-END:variables
 }

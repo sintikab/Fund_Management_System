@@ -55,6 +55,23 @@ public class DBConnect {
         }
     }
         
+        public static void updateDB(String qry){
+            if (connection == null){
+                connection = connectDB();
+            }
+            
+            try {
+            if (preparedStatement != null){
+                preparedStatement.close();
+            }
+            preparedStatement = connection.prepareStatement(qry);
+            preparedStatement.execute();
+ 
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        }
+        
         public static ResultSet selectDB(String qry){
             if (connection == null){
                 connection = connectDB();
