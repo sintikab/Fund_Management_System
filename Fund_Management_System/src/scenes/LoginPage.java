@@ -26,8 +26,17 @@ public class LoginPage extends javax.swing.JFrame {
      */
     public LoginPage() {
         initComponents();
+        hideAttributes();
     }
     
+    private void hideAttributes(){
+        jLabel1.setVisible(false);
+        jButton2.setVisible(false);
+        
+        if (StaticAttributes.CURRENT_USER_TYPE.equals(Common.ADMIN)){
+            jLabel4.setVisible(false);
+        }
+    }
     private void clearFields(){
         username.setText("");
         password.setText("");

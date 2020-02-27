@@ -110,17 +110,23 @@ public class ForgetPassword extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_resetnameActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        LoginPage loginPage = new LoginPage();
+        loginPage.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         String name = resetname.getText();
-        
+
         if (name.equals("")){
             //Empty reset name or id
             Message.showError(AppStrings.EMPTY_FIELDS, AppStrings.ERROR);
         }else{
             try{
-                
+
                 DBConnect.insertDB("INSERT INTO reset_requests(name_or_id, is_reset) VALUES ('"+name+"', 'false')");
-                
+
                 resetname.setText("");
                 Message.showInfoMessage(AppStrings.RESET_SUBMIT, AppStrings.SUCCESS);
             }catch(Exception e){
@@ -130,12 +136,6 @@ public class ForgetPassword extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        LoginPage loginPage = new LoginPage();
-        loginPage.setVisible(true);
-        loginPage.dispose();
-    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
