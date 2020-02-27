@@ -22,6 +22,7 @@ public class AppStrings {
     public static String SUCCESS_UPDATE = "Data updation success";
     public static String SUCCESS_DELETE = "Data deletion success";
     public static String ROW_SELECTION_NULL = "Please select a row before continue";
+    public static String INCORRECT_PASSWORDS = "Incorrect passwords, Please make sure to limit the passwords less than {max} and more than {min}. and also make sure both password and re-enter passwords are equal.";
     
     //Application message titles
      public static String ERROR = "Error";
