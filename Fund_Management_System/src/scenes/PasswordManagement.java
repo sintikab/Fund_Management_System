@@ -103,19 +103,21 @@ PasswordResetRequest passwordResetRequest = null;
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 604, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton4)
-                        .addGap(43, 43, 43)
-                        .addComponent(jLabel3)
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 604, Short.MAX_VALUE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jButton4)
+                                .addGap(43, 43, 43)
+                                .addComponent(jLabel3)
+                                .addGap(0, 0, Short.MAX_VALUE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(217, 217, 217)
+                        .addComponent(jButton1)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(217, 217, 217)
-                .addComponent(jButton1)
-                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -155,7 +157,6 @@ PasswordResetRequest passwordResetRequest = null;
     private void passwordRequestTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_passwordRequestTableMouseClicked
         int row = passwordRequestTable.getSelectedRow();
         passwordResetRequest = new PasswordResetRequest(passwordRequestTable.getValueAt(row, 0).toString(), passwordRequestTable.getValueAt(row, 1).toString());
-        
         
     }//GEN-LAST:event_passwordRequestTableMouseClicked
 
