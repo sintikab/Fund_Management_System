@@ -128,7 +128,7 @@ public class Program {
        try {
            SimpleDateFormat dateFormat = new SimpleDateFormat(common.Common.DATE_FORMAT);
             String program_date = dateFormat.format(this.date);
-        DBConnect.updateDB("UPDATE program SET venue = '"+this.venue+"', contact = '"+this.contact+"', time = '"+this.time+"', date = '"+program_date+"', address = '"+this.budget+"' WHERE id = '"+this.id+"'");
+        DBConnect.updateDB("UPDATE program SET venue = '"+this.venue+"', contact = '"+this.contact+"', time = '"+this.time+"', date = '"+program_date+"', budget = '"+this.budget+"' WHERE id = '"+this.id+"'");
          
        Message.showInfoMessage(AppStrings.SUCCESS_UPDATE, AppStrings.SUCCESS);
        } catch (Exception ex) {

@@ -43,6 +43,7 @@ public class ManagemetSelection extends javax.swing.JFrame {
         jButton5 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setIconImage(new javax.swing.ImageIcon(getClass().getResource("/assets/icon1.png")).getImage());
 
         jButton1.setBackground(new java.awt.Color(255, 255, 255));
         jButton1.setText("SPONSOR MANAGEMENT");

@@ -86,6 +86,7 @@ boolean is_row_selected = false;
         returnButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setIconImage(new javax.swing.ImageIcon(getClass().getResource("/assets/icon1.png")).getImage());
 
         addButton.setText("Add ");
         addButton.addActionListener(new java.awt.event.ActionListener() {

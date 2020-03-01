@@ -31,6 +31,7 @@ public class ProgramSelection extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setIconImage(new javax.swing.ImageIcon(getClass().getResource("/assets/icon1.png")).getImage());
 
         jButton2.setBackground(new java.awt.Color(255, 255, 255));
         jButton2.setText("PAST PROGRAMME");

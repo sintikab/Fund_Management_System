@@ -181,8 +181,8 @@ public class LoginPage extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         //Open sign up window
-        LoginPage loginPage = new LoginPage();
-        loginPage.setVisible(true);
+        SignUp signup = new SignUp();
+        signup.setVisible(true);
         this.dispose();
     }                                        
 
