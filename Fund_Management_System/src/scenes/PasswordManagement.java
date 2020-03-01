@@ -148,12 +148,14 @@ PasswordResetRequest passwordResetRequest = null;
         tableload();
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    //Back button 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         ManagemetSelection managemetSelection = new ManagemetSelection();
         managemetSelection.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton4ActionPerformed
 
+    //Table row selection
     private void passwordRequestTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_passwordRequestTableMouseClicked
         int row = passwordRequestTable.getSelectedRow();
         passwordResetRequest = new PasswordResetRequest(passwordRequestTable.getValueAt(row, 0).toString(), passwordRequestTable.getValueAt(row, 1).toString());
