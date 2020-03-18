@@ -86,6 +86,7 @@ boolean is_row_selected = false;
         program_budget = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setIconImage(new javax.swing.ImageIcon(getClass().getResource("/assets/icon1.png")).getImage());
 
         addButton.setText("Add ");
         addButton.addActionListener(new java.awt.event.ActionListener() {
@@ -136,6 +137,11 @@ boolean is_row_selected = false;
         program_phone.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 program_phoneActionPerformed(evt);
+            }
+        });
+        program_phone.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                program_phoneKeyTyped(evt);
             }
         });
 
@@ -191,6 +197,11 @@ boolean is_row_selected = false;
         program_budget.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 program_budgetActionPerformed(evt);
+            }
+        });
+        program_budget.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                program_budgetKeyTyped(evt);
             }
         });
 
@@ -404,6 +415,22 @@ boolean is_row_selected = false;
         // TODO add your handling code here:
     }//GEN-LAST:event_program_budgetActionPerformed
 
+    private void program_phoneKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_program_phoneKeyTyped
+        // TODO add your handling code here:
+        if(!(Character.isDigit(evt.getKeyChar()))){
+                evt.consume();
+            }
+    }//GEN-LAST:event_program_phoneKeyTyped
+
+    private void program_budgetKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_program_budgetKeyTyped
+        // TODO add your handling code here:
+        if(!(Character.isDigit(evt.getKeyChar()))){
+                evt.consume();
+            }
+    }//GEN-LAST:event_program_budgetKeyTyped
+
+    
+  
     /**
      * @param args the command line arguments
      */

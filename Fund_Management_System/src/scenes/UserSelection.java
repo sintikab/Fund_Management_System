@@ -46,7 +46,7 @@ public class UserSelection extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setBackground(new java.awt.Color(0, 153, 153));
+        setIconImage(new javax.swing.ImageIcon(getClass().getResource("/assets/icon1.png")).getImage());
 
         jButton1.setBackground(new java.awt.Color(255, 255, 255));
         jButton1.setText("Admin Flow");
@@ -63,8 +63,6 @@ public class UserSelection extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-
-        jPanel1.setBackground(new java.awt.Color(0, 153, 153));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);

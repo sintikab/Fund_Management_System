@@ -38,6 +38,8 @@ public class ForgetPassword extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setIconImage(new javax.swing.ImageIcon(getClass().getResource("/assets/icon1.png")).getImage()
+        );
 
         resetname.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

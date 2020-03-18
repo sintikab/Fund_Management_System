@@ -48,6 +48,7 @@ public class SignUp extends javax.swing.JFrame {
         user_re_eneter_password = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setIconImage(new javax.swing.ImageIcon(getClass().getResource("/assets/icon1.png")).getImage());
 
         jButton2.setText("< Select Operation");
         jButton2.addActionListener(new java.awt.event.ActionListener() {

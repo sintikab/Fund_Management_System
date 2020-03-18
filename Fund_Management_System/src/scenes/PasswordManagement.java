@@ -62,6 +62,7 @@ PasswordResetRequest passwordResetRequest = null;
         jScrollPane1.setViewportView(jTable1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setIconImage(new javax.swing.ImageIcon(getClass().getResource("/assets/icon1.png")).getImage());
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel3.setText("Reset password request");
@@ -148,12 +149,14 @@ PasswordResetRequest passwordResetRequest = null;
         tableload();
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    //Back button 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         ManagemetSelection managemetSelection = new ManagemetSelection();
         managemetSelection.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton4ActionPerformed
 
+    //Table row selection
     private void passwordRequestTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_passwordRequestTableMouseClicked
         int row = passwordRequestTable.getSelectedRow();
         passwordResetRequest = new PasswordResetRequest(passwordRequestTable.getValueAt(row, 0).toString(), passwordRequestTable.getValueAt(row, 1).toString());

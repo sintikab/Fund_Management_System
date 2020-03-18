@@ -181,17 +181,19 @@ public class LoginPage extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         //Open sign up window
-        LoginPage loginPage = new LoginPage();
-        loginPage.setVisible(true);
+        SignUp signup = new SignUp();
+        signup.setVisible(true);
         this.dispose();
     }                                        
 
+    //Forget password button
     private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {                                     
         ForgetPassword forgetPassword = new ForgetPassword();
         forgetPassword.setVisible(true);
         this.dispose();
-    }                                    
-
+    }    
+    
+    //Login button
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         String usernameText = username.getText();
         String passwordText = password.getText();
@@ -261,6 +263,7 @@ public class LoginPage extends javax.swing.JFrame {
         // TODO add your handling code here:
     }                                        
 
+    //Back button
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         UserSelection userSelection = new UserSelection();
         userSelection.setVisible(true);
